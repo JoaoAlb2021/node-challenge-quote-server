@@ -22,16 +22,17 @@ app.get("/quotes", (request, response) => {
   response.send(quotes)
 })
 
-app.get("/quotes/:id", (request, response) => {
+app.get("/:id", (request, response) => {
   const quoteNumber = request.params.id
   response.send(quotes[quoteNumber])
+
 })
 
-app.get("/quotes/quotes/random", (request, response) => {
+app.get("/quotes/random", (request, response) => {
   response.send(pickFromArray(quotes))
 })
 
-app.get("/quotes/quotes/search", (request, response) => {
+app.get("/quotes/search", (request, response) => {
   const term = request.query.term.toLowerCase()
   newJSON = []  
 
