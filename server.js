@@ -18,7 +18,47 @@ app.get("/", function (request, response) {
 });
 
 //START OF YOUR CODE...
+app.get("/quotes", (request, response) => {
+  response.send(quotes)
+})
 
+app.get("/quotes/:id", (request, response) => {
+  const quoteNumber = request.params.id
+  response.send(quotes[quoteNumber])
+})
+
+app.get("/quotes/quotes/random", (request, response) => {
+  response.send(pickFromArray(quotes))
+})
+
+app.get("/quotes/quotes/search", (request, response) => {
+  const term = request.query.term.toLowerCase()
+  newJSON = []  
+
+  ////////////////////////////////
+  // if(term === "life" || term === "success" || term === "miss"){
+  //   quotes.map((obj)=> {
+  //     if(obj.quote.toLowerCase().includes(term) === true || obj.author.toLowerCase().includes(term)){
+  //       newJSON.push(obj)
+  //       return(newJSON)
+  //     }
+  //   })
+  //   response.send(newJSON) 
+  // }
+  // else{
+  //   response.send("WRONG WORD!")
+  // }
+  ///////////////////////////////
+
+  quotes.map((obj)=> {
+    if(obj.quote.toLowerCase().includes(term) === true || obj.author.toLowerCase().includes(term)){
+      newJSON.push(obj)
+      return(newJSON)
+    }
+  })
+  response.send(newJSON)
+
+})
 //...END OF YOUR CODE
 
 //You can use this function to pick one element at random from a given array
